@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- user-scalable=no -->
+    <title>Strawberry Ripeness Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='strawberry.css') }}">
+</head>
+
+<body>
+    <div class="headerText">
+        Strawberry Ripeness Detection
+    </div>
+
+    <div class="bodyText">
+        Upload an Image of a Strawberry<br><br>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" id="fileInput">
+            <button type="button" onclick="checkRipeness()">Check Ripeness</button>
+        </form>
+        <br>
+        <img id="uploadedImage" src="#" alt="Uploaded Image">
+        <br>
+        <img id="resultImage" src="#" alt="Processed Image">
+    </div>
+
+    <div id="resultText" class="hidden resultText"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            if (event.target.files.length > 0) {
+                const fileReader = new FileReader();
+                fileReader.onload = function(event) {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = event.target.result;
+                    uploadedImage.style.display = 'block';  // Show uploaded image
+                };
+                fileReader.readAsDataURL(event.target.files[0]);
+            }
+        });
+
+        function checkRipeness() {
+            const formData = new FormData(document.getElementById('uploadForm'));
+            fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const resultImage = document.getElementById('resultImage');
+                resultImage.src = url;
+                resultImage.style.display = 'block';  // Show processed image
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
