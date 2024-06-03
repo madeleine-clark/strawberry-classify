@@ -1,0 +1,87 @@
+body
+{
+    background-color: rgb(243, 191, 191);
+}
+
+.headerText, .bodyText
+{
+    background-color: rgb(233, 93, 93);
+    text-align: center;
+    font-family: 'garamond';
+    color: rgb(249, 249, 249);
+    width: 95%;
+    margin: 1.25% auto;
+}
+
+.resultText
+{
+    background-color: rgb(233, 93, 93);
+    text-align: center;
+    font-family: 'garamond';
+    color: rgb(249, 249, 249);
+    width: 95%;
+    margin: 1.25% auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: 125%;
+
+}
+
+#fileInput
+{
+    justify-content: center;
+    align-items: center;
+}
+
+#resultText
+{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#checkButton
+{
+    margin: auto;
+}
+
+.headerText
+{
+    font-size: 170%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 2.5%;
+}
+
+.bodyText
+{
+    font-size: 125%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 1.25%;
+}
+
+#uploadedImage
+{
+    width: 40%;
+    height: auto;
+    margin: 0 auto; /*center the image */
+    display: none;
+}
+
+#resultImage
+{
+    width: 90%;
+    height: auto;
+    margin: 0 auto; /*center the image */
+    display: none;
+}
+
+#arrow
+{
+    margin-top: 15%;
+}
+
+.hidden
+{
+    display: none;
+}
