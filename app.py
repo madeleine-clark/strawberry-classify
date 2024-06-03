@@ -35,20 +35,24 @@ class StrawberryCNN(torch.nn.Module):
         return x
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/Users/Katie/Desktop/StrawWeb/strawberry-classify/uploads'
-PROCESSED_FOLDER = '/Users/Katie/Desktop/StrawWeb/strawberry-classify/processed'
+UPLOAD_FOLDER = 'uploads'
+PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PROCESSED_FOLDER'] = PROCESSED_FOLDER
 
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Load your trained model
 model = StrawberryCNN()
-model.load_state_dict(torch.load('/Users/Katie/Desktop/StrawWeb/strawberry-classify/strawberry_classifier.pth', map_location=torch.device('cpu')))
+model_path = os.path.join(script_dir, 'strawberry_classifier.pth')
+model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
 # model2 = StrawberryCNN()
-# model2.load_state_dict(torch.load('/Users/Katie/Desktop/StrawWeb/strawberry-classify/strawberry_filter_regions.pth', map_location=torch.device('cpu')))
+# model2.load_state_dict(torch.load('strawberry_filter_regions.pth', map_location=torch.device('cpu')))
 # model2.eval()
 
 # Transformations and prediction function
